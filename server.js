@@ -40,5 +40,5 @@ app.post('/send-email', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on https://moss175.github.io/BCards/`);
+  console.log(`Server is running on https://freyicent3d.org/`);
 });
