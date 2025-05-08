@@ -6,7 +6,6 @@ const path = require('path');
 
 const app = express();
 
-app.use(cors());
 app.use(bodyParser.json());
 
 const resend = new Resend('re_KxkyJCNJ_EryNKc2384JvALLxp8Msx5WE');
