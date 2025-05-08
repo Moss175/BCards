@@ -1,0 +1,7 @@
+Open CMD and run these one at a time:
+
+cd "C:\Users\mark_moss\Documents\online\BusinessCards"
+npm init -y
+npm install express body-parser cors resend
+node server.js
+

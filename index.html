@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aluminum Business Card Order Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Aluminum Business Card Order Form</h2>
+        <div class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name you want on cards</label>
+                <input type="text" id="name" name="name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+            <div>
+                <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+            <div>
+                <label for="desk" class="block text-sm font-medium text-gray-700">Desk extension</label>
+                <input type="tel" id="desk" name="desk" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+            <div>
+                <label for="color" class="block text-sm font-medium text-gray-700">Card Color</label>
+                <select id="color" name="color" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                    <option value="" disabled selected>Select a color</option>
+                    <option value="silver">Silver</option>
+                    <option value="black">Black</option>
+                    <option value="gold">Gold</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="light blue">Light Blue</option>
+                    <option value="matte gold">Matte Gold</option>
+                    <option value="pink">Pink</option>
+                    <option value="rose">Rose</option>
+                    <option value="matte black">Matte Black</option>
+                </select>
+            </div>
+            <button type="button" onclick="submitOrder()" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700">Submit Order</button>
+            <p id="status" class="text-center text-sm mt-4"></p>
+        </div>
+    </div>
+
+    <script>
+        async function submitOrder() {
+            const status = document.getElementById('status');
+            status.textContent = '';
+
+            const formData = {
+                name: document.getElementById('name').value,
+                title: document.getElementById('title').value,
+                mobile: document.getElementById('mobile').value,
+                desk: document.getElementById('desk').value,
+                email: document.getElementById('email').value,
+                color: document.getElementById('color').value
+            };
+
+            if (!formData.name || !formData.title || !formData.mobile || !formData.email || !formData.color) {
+                status.textContent = 'Please fill out all required fields.';
+                status.className = 'text-center text-red-600 text-sm mt-4';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    status.textContent = 'Order submitted and email sent successfully.';
+                    status.className = 'text-center text-green-600 text-sm mt-4';
+                } else {
+                    status.textContent = result.error || 'Failed to send order.';
+                    status.className = 'text-center text-red-600 text-sm mt-4';
+                }
+            } catch (error) {
+                status.textContent = 'Error submitting order. Check your connection or server.';
+                status.className = 'text-center text-red-600 text-sm mt-4';
+            }
+        }
+    </script>
+</body>
+</html>

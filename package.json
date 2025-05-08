@@ -1,0 +1,29 @@
+{
+  "name": "business-cards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.5",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "resend": "^4.5.1",
+    "tailwindcss": "^4.1.5"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "vite": "^6.3.5"
+  }
+}
