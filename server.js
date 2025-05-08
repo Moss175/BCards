@@ -5,7 +5,6 @@ const { Resend } = require('resend');
 const path = require('path');
 
 const app = express();
-const url = https://moss175.github.io/BCards/;
 
 app.use(cors());
 app.use(bodyParser.json());
